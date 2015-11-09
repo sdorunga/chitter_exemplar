@@ -2,10 +2,13 @@ ENV['RACK_ENV'] = 'test'
 require 'database_cleaner'
 require 'capybara/rspec'
 
+require './spec/helpers/users_helper'
 require './app/app'
 Capybara.app = Chitter
 
 RSpec.configure do |config|
+  config.include UsersHelper
+
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:transaction)
