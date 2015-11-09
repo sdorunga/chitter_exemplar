@@ -3,8 +3,8 @@ ENV["RACK_ENV"] ||= "development"
 require "sinatra/base"
 require "sinatra/flash"
 require 'sinatra/partial'
+require './app/models/login'
 require_relative "data_mapper_setup"
-require 'pry'
 
 class Chitter < Sinatra::Base
   enable :sessions
