@@ -15,6 +15,27 @@ feature "User management" do
     fill_in :username, with: "sdorunga"
 
     click_button "Sign Up"
+
     expect(page).to have_content("Logged in as: sdorunga")
+  end
+
+  scenario "I can sign in as a user" do
+    create_user
+
+    visit "/"
+    click_link "Sign In"
+    fill_in :email, with: "stefan@makersacademy.com"
+    fill_in :password, with: "supersecret"
+    click_button "Sign In"
+
+    expect(page).to have_content("Logged in as: sdorunga")
+  end
+
+  def create_user
+    User.create(email: "stefan@makersacademy.com",
+                password: "supersecret",
+                password_confirmation: "supersecret",
+                name: "Stefan",
+                username: "sdorunga")
   end
 end
