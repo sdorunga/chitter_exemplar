@@ -21,3 +21,4 @@ class Chitter < Sinatra::Base
   end
 end
 require_relative "controllers/users"
+require_relative "controllers/sessions"
