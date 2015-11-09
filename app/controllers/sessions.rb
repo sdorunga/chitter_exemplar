@@ -8,4 +8,9 @@ class Chitter < Sinatra::Base
     session[:user_id] = user.id if user
     redirect "/"
   end
+
+  delete "/sessions" do
+    session.delete(:user_id)
+    redirect "/"
+  end
 end

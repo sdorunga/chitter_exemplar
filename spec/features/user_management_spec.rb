@@ -31,11 +31,31 @@ feature "User management" do
     expect(page).to have_content("Logged in as: sdorunga")
   end
 
-  def create_user
-    User.create(email: "stefan@makersacademy.com",
-                password: "supersecret",
-                password_confirmation: "supersecret",
+  scenario "I can sign out" do
+    sign_in
+
+    visit "/"
+    click_button "Sign Out"
+
+    visit "/peeps/new"
+    expect(page).to have_content("You must be signed in to post peeps")
+  end
+
+  def create_user(email: "stefan@makersacademy.com", password: "supersecret")
+    User.create(email: email,
+                password: password,
+                password_confirmation: password,
                 name: "Stefan",
                 username: "sdorunga")
   end
+
+  def sign_in
+    user = create_user(password: "password")
+    visit "/"
+    click_link "Sign In"
+    fill_in :email, with: user.email
+    fill_in :password, with: "password"
+    click_button "Sign In"
+  end
+
 end
