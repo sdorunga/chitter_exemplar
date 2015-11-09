@@ -11,7 +11,6 @@ class Chitter < Sinatra::Base
              username: params[:username])
     if user.save
       session[:user_id] = user.id
-      flash.next[:notice] = "Logged in as: #{current_user && current_user.username}"
     end
 
     redirect "/"
