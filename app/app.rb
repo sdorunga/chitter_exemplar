@@ -23,6 +23,10 @@ class Chitter < Sinatra::Base
     def current_user
       @current_user ||= User.get(session[:user_id])
     end
+
+    def date_and_time(time)
+      time.strftime("%c")
+    end
   end
 end
 require_relative "controllers/users"
