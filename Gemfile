@@ -11,4 +11,5 @@ group :test do
   gem "database_cleaner"
   gem "capybara"
   gem "pry"
+  gem "timecop"
 end
