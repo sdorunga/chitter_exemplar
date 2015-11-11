@@ -1,4 +1,8 @@
 <% @peeps.each do |peep| %>
-  <%= peep.content %>
-  <%= peep.user.name %>
+  <div class="peep">
+    <div class="content">
+      <%= peep.content %>
+    </div>
+    <%= peep.user.name %>
+  </div>
 <% end %>
