@@ -20,6 +20,15 @@ feature "User management" do
     expect(page).to have_content("Email is already taken")
   end
 
+  scenario "I can't sign up with an already taken username" do
+    sign_up
+    visit "/"
+    click_button "Sign Out"
+    sign_up(email: "user@test.com")
+
+    expect(page).to have_content("Username is already taken")
+  end
+
   scenario "I can sign in as a user" do
     create_user
 
