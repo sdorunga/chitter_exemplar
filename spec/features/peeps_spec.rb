@@ -1,15 +1,27 @@
 require "timecop"
 
 feature "Peeps" do
-  scenario "I can post peeps" do
+  before do
     sign_in
+  end
+
+  scenario "I can post peeps" do
     create_peep("OMG My cat is sooo cute! #kitty")
 
     expect(page).to have_content("OMG My cat is sooo cute! #kitty")
   end
 
+  scenario "I can see the time when a peep was posted" do
+    Timecop.freeze do
+      create_peep("OMG My cat is sooo cute! #kitty")
+
+      within(".peep .timestamp") do
+        expect(page).to have_content DateTime.now.strftime("%c")
+      end
+    end
+  end
+
   scenario "Peeps are displayed in reverse order" do
-    sign_in
     create_peep("OMG My cat is sooo cute! #kitty")
 
     Timecop.travel(DateTime.now + 1) do
