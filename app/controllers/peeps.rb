@@ -3,7 +3,7 @@ class Chitter < Sinatra::Base
     if current_user
       erb :"peeps/new"
     else
-      flash.next[:notice] = "You must be signed in to post peeps"
+      flash.next[:notice] = ["You must be signed in to post peeps"]
       redirect "/"
     end
   end

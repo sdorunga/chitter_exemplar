@@ -11,6 +11,8 @@ class Chitter < Sinatra::Base
              username: params[:username])
     if user.save
       session[:user_id] = user.id
+    else
+      flash[:notice] = user.errors.full_messages
     end
 
     redirect "/"
